@@ -15,9 +15,9 @@ app.post('/repos', function (req, res) {
   console.log('dd', typeof ggit, git)
   // This route should take the github username provided
   // and get the repo information from the github API, then
-  var userData = git.getReposByUsername(req.body.user,mgdb.save);
+  var userData = git.getReposByUsername(req.body.user, mgdb.save);
   // save the repo information in the database
-  // console.log('USERDATA>> ',userData);
+  console.log('USERDATA>> ',userData);
   // mgdb.save(userData);
   res.send('success');
 });

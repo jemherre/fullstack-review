@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/fetcher');
 
 let repoSchema = mongoose.Schema({
-    name: String,
+    name: {type: String, index: {unique: true}},
     full_name: String,
     url : String,
     description: String,
@@ -20,7 +20,6 @@ let save = (repos) => {
   // This function should save a repo or repos to
   // the MongoDB
   if(typeof repos === 'object'){//expecting an array of objects/documents
-    console.log('repo -for loop');
     for(var i = 0; i< repos.length; i++){ //maybe we don't need this
       var repo = new Repo(repos[i]);
       repo.save(function(err, repo){
@@ -32,6 +31,7 @@ let save = (repos) => {
     var repo = new Repo(repos);
     repo.save(function(err, repo){
       if(err) console.log('err');
+      return repo;
     });
   }
 }

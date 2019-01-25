@@ -34,7 +34,7 @@ let getReposByUsername = (username, cb) => {
         result.push(data);
       }
       console.log('RESULT!!! ',result);
-      return cb(result);//??
+      cb(result);
     }
   });
 
