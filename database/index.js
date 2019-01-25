@@ -27,11 +27,10 @@ let save = (repos) => {
       });
     }
   } else { //save a single object/document onto db
-    console.log('single:', repos);
     var repo = new Repo(repos);
     repo.save(function(err, repo){
       if(err) console.log('err');
-      return repo;
+      // return repo;
     });
   }
 }

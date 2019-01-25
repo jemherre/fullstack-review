@@ -15,6 +15,7 @@ let getReposByUsername = (username, cb) => {
     }
   };
 
+
   request(options, function(err, response, body){
     if (!err && response.statusCode == 200) {
       var info = JSON.parse(body);
@@ -22,7 +23,7 @@ let getReposByUsername = (username, cb) => {
       for(var i = 0; i < info.length; i++){
         var data = {
           name: info[i].name,
-          full_name: info[i].fullname,
+          full_name: info[i].full_name,
           url : info[i].url,
           description: info[i].description,
           commits_url: info[i].commits_url,
@@ -33,8 +34,11 @@ let getReposByUsername = (username, cb) => {
         };
         result.push(data);
       }
-      console.log('RESULT!!! ',result);
+      // console.log('RESULT!!! ',result);
       cb(result);
+      // return result;
+    } else {
+      return err;
     }
   });
 

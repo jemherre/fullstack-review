@@ -3,6 +3,7 @@ let app = express();
 var bodyParser = require('body-parser');
 var git = require('../helpers/github');
 var mgdb= require('../database/index');
+var Promise = require("bluebird");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -15,10 +16,8 @@ app.post('/repos', function (req, res) {
   console.log('dd', typeof ggit, git)
   // This route should take the github username provided
   // and get the repo information from the github API, then
-  var userData = git.getReposByUsername(req.body.user, mgdb.save);
-  // save the repo information in the database
-  console.log('USERDATA>> ',userData);
-  // mgdb.save(userData);
+  git.getReposByUsername(req.body.user, mgdb.save);
+  // save the repo information in the database through callback
   res.send('success');
 });
 
