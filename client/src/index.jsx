@@ -10,12 +10,13 @@ class App extends React.Component {
     this.state = { 
       repos: []
     }
-
+    
   }
 
   search (term) {
     console.log(`${term} was searched`);
-    // TODO
+    var app =this;
+    console.log('this---- ',this);
     $.ajax({
       method: 'POST',
       url: '/repos',
@@ -24,14 +25,13 @@ class App extends React.Component {
       },
       success: function(result){
         console.log('success',result);
-        //another ajax request to get info
+        //another ajax request to get and load info
         $.ajax({
           method: 'GET',
           url: '/repos',
-          success: function(result){
-            console.log('success',result);
-            //another ajax request to get info
-            
+          success: function (result){
+            var obj = JSON.parse(result); //used for printing # of repos
+            app.setState({repos: obj});
           }
         });
 
