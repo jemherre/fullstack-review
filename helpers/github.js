@@ -35,8 +35,8 @@ let getReposByUsername = (username, cb) => {
         result.push(data);
       }
       // console.log('RESULT!!! ',result);
-      cb(result);
-      // return result;
+      var database = cb(result);
+      return database;
     } else {
       return err;
     }

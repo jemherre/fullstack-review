@@ -30,9 +30,9 @@ let save = (repos) => {
     var repo = new Repo(repos);
     repo.save(function(err, repo){
       if(err) console.log('err');
-      // return repo;
+        return repo;
     });
   }
 }
 
-module.exports.save = save;
+module.exports = {save, Repo};

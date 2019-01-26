@@ -25,6 +25,16 @@ class App extends React.Component {
       success: function(result){
         console.log('success',result);
         //another ajax request to get info
+        $.ajax({
+          method: 'GET',
+          url: '/repos',
+          success: function(result){
+            console.log('success',result);
+            //another ajax request to get info
+            
+          }
+        });
+
       }
     });
   }
