@@ -41,7 +41,25 @@ let getReposByUsername = (username, cb) => {
       return err;
     }
   });
-
 }
 
-module.exports.getReposByUsername = getReposByUsername;
+var getRepo = function(link){
+  let options = {
+    url: link,
+    headers: {
+      'User-Agent': 'request',
+      'Authorization': `token ${config.TOKEN}`
+    }
+  };
+
+  request(options, function(err, response, body){
+    if (!err && response.statusCode == 200) {
+      var data = JSON.parse(body);
+      console.log(data);
+    } else {
+      return err;
+    }
+  });
+}
+
+module.exports = {getReposByUsername, getRepo};

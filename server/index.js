@@ -3,8 +3,6 @@ let app = express();
 var bodyParser = require('body-parser');
 var git = require('../helpers/github');
 var mgdb= require('../database/index');
-var React = require('react');
-var ReactDOMServer = require('react-dom/server');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -38,6 +36,12 @@ app.get('/repos', function (req, res) {
     res.send(JSON.stringify(info));
   });
 });
+
+app.post('/repo', function (req, res) {
+  git.getRepo(req.body.link);
+  res.send('data');
+});
+
 
 let port = 1128;
 

@@ -4,6 +4,7 @@ import $ from 'jquery';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -39,10 +40,22 @@ class App extends React.Component {
     });
   }
 
+  handleClick(link){
+    $.ajax({
+      method: 'POST',
+      url: '/repo',
+      data: {link},
+      success: function (result){
+        // var obj = JSON.parse(result); //used for printing # of repos
+        console.log(result);
+      }
+    });
+  }
+
   render () {
     return (<div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
+      <RepoList repos={this.state.repos} onClick={this.handleClick.bind(this)}/>
       <Search onSearch={this.search.bind(this)}/>
     </div>)
   }

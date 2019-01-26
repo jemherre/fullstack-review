@@ -2,25 +2,26 @@ import React from 'react';
 
 const RepoList = (props) => (
   <div>
-    {/* <h4> Repo List Component </h4>
-    There are {props.repos.length} repos. */}
     <ul>
-      {RenderRepo(props.repos)} 
+      {RenderRepo(props)}
     </ul>
   </div>
 )
 
 const SingleRepo = (doc) => {
-  return <li><a href='#' onClick={(e)=>{console.log(e)}}>{doc.repo.name}</a></li>;
+  return <li><a href='#' onClick={(e)=>{doc.onClick(doc.repo.url)}}>{doc.repo.name}</a></li>;
 } 
 
-var RenderRepo = function(list){
+var RenderRepo = function(arr){
   var html = [];
-  list.map((doc)=>{
-    html.push(<SingleRepo repo={doc} key={doc.name}/>);
+  arr.repos.map((doc)=>{
+    html.push(<SingleRepo repo={doc} key={doc.name} onClick={arr.onClick}/>);
   });
-
-  return html;
+  console.log(html.length, html)
+  if(html.length > 0){
+    return html;
+  }
+  return null;
 };
 
 export default RepoList;
