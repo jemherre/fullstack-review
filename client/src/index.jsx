@@ -40,7 +40,8 @@ class App extends React.Component {
     });
   }
 
-  handleClick(link){
+  handleClick(link, e){
+    e.preventDefault();
     $.ajax({
       method: 'POST',
       url: '/repo',

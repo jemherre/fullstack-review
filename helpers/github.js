@@ -1,5 +1,6 @@
 const request = require('request');
 const config = require('../config');
+var saveDB = require('../database/index');
 
 let getReposByUsername = (username, cb) => {
   // TODO - Use the request module to request repos for a specific
@@ -23,6 +24,7 @@ let getReposByUsername = (username, cb) => {
       for(var i = 0; i < info.length; i++){
         var data = {
           name: info[i].name,
+          login: info[i].owner.login,
           full_name: info[i].full_name,
           url : info[i].url,
           description: info[i].description,
