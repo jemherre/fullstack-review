@@ -17,23 +17,19 @@ let repoSchema = mongoose.Schema({
 let Repo = mongoose.model('Repo', repoSchema);
 
 let save = (repos, cb) => {
-  // TODO: Your code here
-  // This function should save a repo or repos to
-  // the MongoDB
-  
   if(typeof repos === 'object'){//expecting an array of objects/documents
     
     for(var i = 0; i< repos.length;i++){ //maybe we don't need this
       Repo.findOne({name: repos[i].name}).update({name: repos[i].name},repos[i],{upsert: true}).exec((err, num)=>{
-        if(err) console.log(err);
-        // console.log(num, i);
+        if(err) return cb(err);
       });
     }
+    return cb(null);
   } else { //save a single object/document onto db
-    var repo = new Repo(repos);
-    repo.save(function(err, repo){
-      if(err) console.log('err');
+    Repo.findOne({name: repos.name}).update({name: repos.name},repos,{upsert: true}).exec((err, num)=>{
+      if(err) return cb(err);
     });
+    return cb(null);
   }
 }
 

@@ -4,7 +4,7 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      term: 'example'
+      term: ''
     }
   }
 
@@ -15,7 +15,6 @@ class Search extends React.Component {
   }
 
   search() {
-    console.log('seach comp >>');
     this.props.onSearch(this.state.term);
   }
 

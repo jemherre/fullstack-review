@@ -36,16 +36,14 @@ let getReposByUsername = (username, cb) => {
         };
         result.push(data);
       }
-      // console.log('RESULT!!! ',result);
-      var database = cb(result);
-      return database;
+      return cb(result);
     } else {
-      return err;
+      return cb(err);
     }
   });
 }
 
-var getRepo = function(link){
+var getRepo = function(link, cb){
   let options = {
     url: link,
     headers: {
@@ -57,9 +55,9 @@ var getRepo = function(link){
   request(options, function(err, response, body){
     if (!err && response.statusCode == 200) {
       var data = JSON.parse(body);
-      console.log(data);
+      return cb(null,data);
     } else {
-      return err;
+      return cb(err, null);
     }
   });
 }
